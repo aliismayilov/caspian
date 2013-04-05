@@ -1,0 +1,6 @@
+Django==1.5.1
+argparse==1.2.1
+dj-database-url==0.2.1
+django-filebrowser==3.5.2
+django-grappelli==2.4.4
+wsgiref==0.1.2
