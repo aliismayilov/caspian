@@ -1,0 +1,46 @@
+﻿{% extends "base_entries.html" %}
+
+{% block title %}
+    {{ month|date:"F Y" }} | 
+{% endblock %}
+
+{% block topmenu %}
+    {% for page in top_pages %}
+        <a href="{{ page.get_absolute_url_az }}">{{ page.title_az }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block headerright %}
+    {% for page in side_pages %}
+        <a href="{{ page.get_absolute_url_az }}">{{ page.title_az }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ month|date:"F Y" }}</h1>
+    {% for entry in entries.object_list %}
+        <p><a href="{{ entry.get_absolute_url_az }}">{{ entry.title_az }} ({{ entry.pub_date|date:"F j" }})</a></p>
+    {% endfor %}
+    
+    {% if entries.paginator.num_pages > 0 %}
+    <div class="pagination">
+        <span class="step-links">
+        {% if entries.has_previous %}
+            <a href="?page={{ entries.previous_page_number }}">əvvəl</a>
+        {% endif %}
+        
+            <span class="current">
+                {{ entries.number }}/{{ entries.paginator.num_pages }}
+            </span>
+        
+        {% if entries.has_next %}
+            <a href="?page={{ entries.next_page_number }}">sonra</a>
+        {% endif %}
+        </span>
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block copyright %}
+    Bütün hüquqlar qorunur!
+{% endblock %}

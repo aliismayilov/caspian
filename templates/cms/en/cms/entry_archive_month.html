@@ -1,0 +1,46 @@
+﻿{% extends "base_entries.html" %}
+
+{% block title %}
+    {{ month|date:"F Y" }} | 
+{% endblock %}
+
+{% block topmenu %}
+    {% for page in top_pages %}
+        <a href="{{ page.get_absolute_url_en }}">{{ page.title_en }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block headerright %}
+    {% for page in side_pages %}
+        <a href="{{ page.get_absolute_url_en }}">{{ page.title_en }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ month|date:"F Y" }}</h1>
+    {% for entry in entries.object_list %}
+        <p><a href="{{ entry.get_absolute_url_en }}">{{ entry.title_en }} ({{ entry.pub_date|date:"F j" }})</a></p>
+    {% endfor %}
+    
+    {% if entries.paginator.num_pages > 0 %}
+    <div class="pagination">
+        <span class="step-links">
+        {% if entries.has_previous %}
+            <a href="?page={{ entries.previous_page_number }}">prev</a>
+        {% endif %}
+        
+            <span class="current">
+                {{ entries.number }}/{{ entries.paginator.num_pages }}
+            </span>
+        
+        {% if entries.has_next %}
+            <a href="?page={{ entries.next_page_number }}">next</a>
+        {% endif %}
+        </span>
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block copyright %}
+    All rights reserved!
+{% endblock %}

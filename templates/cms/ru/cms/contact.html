@@ -1,0 +1,29 @@
+﻿{% extends "base.html" %}
+
+{% block title %}
+    Онлайн консультация | 
+{% endblock %}
+
+{% block topmenu %}
+    {% for page in top_pages %}
+        <a href="{{ page.get_absolute_url_ru }}">{{ page.title_ru }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block headerright %}
+    {% for page in side_pages %}
+        <a href="{{ page.get_absolute_url_ru }}">{{ page.title_ru }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    <p style="text-align: center">Для консультации в онлайновом режиме заполните в обратной связи необходимые поля.</p>
+    <form action="/ru/contact/" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Отправить" />
+    </form>
+{% endblock %}
+
+{% block copyright %}
+    Все права защищены!
+{% endblock %}

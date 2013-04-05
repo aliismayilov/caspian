@@ -1,0 +1,74 @@
+﻿{% extends "base.html" %}
+
+{% block topmenu %}
+    {% for page in top_pages %}
+        <a href="{{ page.get_absolute_url_en }}">{{ page.title_en }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block headerright %}
+    {% for page in side_pages %}
+        <a href="{{ page.get_absolute_url_en }}">{{ page.title_en }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block tagline %}
+    <p class="header-line1">Your future</p>
+    <p class="header-line2">in reliable hands</p>
+{% endblock %}
+
+{% block content %}
+    <div class="content-left">
+        <div class="content-left-pics">
+            <a href="/en/uslugi.html" class="audit">AUDITOR<br />SERVICES</a>
+            <a href="/en/uslugi.html" class="buxgal">ACCOUNTING<br />SERVICES</a>
+            <a href="/en/uslugi.html" class="consulting">CONSULTING<br />SERVICES</a>
+        </div>
+        <div class="content-left-news">
+            <h1 class="content-left-news-title">Economics</h1>
+            <ul>
+                {% for title, url in links %}
+                    <li><a href="{{ url }}">{{ title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="content-right">
+        <div class="content-right-news">
+            <h1>News</h1>
+            {% for entry in latest_entries %}
+                <a href="{{ entry.get_absolute_url_en }}">
+                    <img src="{{ STATIC_URL }}img/arr.gif" alt="" />
+                    {{ entry.title_en }}
+                </a>
+            {% endfor %}
+        </div>
+        <div class="content-right-vote">
+            <h1>Poll</h1>
+            <h2>{{ poll.question_en }}</h2>
+        {% if show_result %}
+            <ul>
+            {% for choice in poll.choice_set.all %}
+                <li>{{ choice.choice_en }} - {{ choice.vote }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <form action="/{{ lang_name }}/poll/{{ poll.id }}/vote/" method="post">
+            {% csrf_token %}
+            {% for choice in poll.choice_set.all %}
+                <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+                <label for="choice{{ forloop.counter }}">{{ choice.choice_en }}</label><br />
+            {% endfor %}
+                <div>
+                    <input type="submit" value="Vote" class="vote-button" />
+                    <input type="button" value="Results" class="vote-button" onclick="window.location.href='/{{ lang_name }}/?show_result=true'" />
+                </div>
+            </form>
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block copyright %}
+    All rights reserved!
+{% endblock %}

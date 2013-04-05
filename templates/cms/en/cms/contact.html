@@ -1,0 +1,29 @@
+﻿{% extends "base.html" %}
+
+{% block title %}
+    Online consulting | 
+{% endblock %}
+
+{% block topmenu %}
+    {% for page in top_pages %}
+        <a href="{{ page.get_absolute_url_ru }}">{{ page.title_en }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block headerright %}
+    {% for page in side_pages %}
+        <a href="{{ page.get_absolute_url_ru }}">{{ page.title_en }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    <p style="text-align: center">Please fill the below fields to get online consulting.</p>
+    <form action="/ru/contact/" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Send" />
+    </form>
+{% endblock %}
+
+{% block copyright %}
+    All rights reserved!
+{% endblock %}

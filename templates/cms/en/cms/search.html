@@ -1,0 +1,43 @@
+﻿{% extends "base_categories.html" %}
+
+{% block title %}
+    {{ category.title }} | 
+{% endblock %}
+
+{% block topmenu %}
+    {% for page in top_pages %}
+        <a href="{{ page.get_absolute_url_en }}">{{ page.title_en }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block headerright %}
+    {% for page in side_pages %}
+        <a href="{{ page.get_absolute_url_en }}">{{ page.title_en }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    <h1>Results for {{ query }}</h1>
+    
+    {% if not search_categories and not search_entries and not search_pages %}
+        <p>No results.</p>
+    {% else %}
+        {% if search_entries %}
+            <h3>News</h3>
+            {% for entry in search_entries %}
+                <p><a href="{{ entry.get_absolute_url_en }}">{{ entry.title_en }}</a></p>
+            {% endfor %}
+        {% endif %}
+        
+        {% if search_pages %}
+            <h3>Pages</h3>
+            {% for page in search_pages %}
+                <p><a href="{{ page.get_absolute_url_en }}">{{ page.title_en }}</a></p>
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block copyright %}
+    All rights reserved!
+{% endblock %}

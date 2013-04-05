@@ -1,0 +1,29 @@
+﻿{% extends "base.html" %}
+
+{% block title %}
+    Onlayn məsləhət | 
+{% endblock %}
+
+{% block topmenu %}
+    {% for page in top_pages %}
+        <a href="{{ page.get_absolute_url_ru }}">{{ page.title_az }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block headerright %}
+    {% for page in side_pages %}
+        <a href="{{ page.get_absolute_url_ru }}">{{ page.title_az }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    <p style="text-align: center">Onlayn rejimdə məsləhət almaq üçün aşağıdakı sahələri doldurun.</p>
+    <form action="/ru/contact/" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Göndər" />
+    </form>
+{% endblock %}
+
+{% block copyright %}
+    Bütün hüquqlar qorunur!
+{% endblock %}

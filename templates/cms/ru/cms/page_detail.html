@@ -1,0 +1,26 @@
+﻿{% extends "base.html" %}
+
+{% block title %}
+    {{ page.title_ru }} | 
+{% endblock %}
+
+{% block topmenu %}
+    {% for page in top_pages %}
+        <a href="{{ page.get_absolute_url_ru }}">{{ page.title_ru }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block headerright %}
+    {% for page in side_pages %}
+        <a href="{{ page.get_absolute_url_ru }}">{{ page.title_ru }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ page.title_ru }}</h1>
+    {{ page.body_ru|safe }}
+{% endblock %}
+
+{% block copyright %}
+    Все права защищены!
+{% endblock %}

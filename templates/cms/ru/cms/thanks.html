@@ -1,0 +1,25 @@
+﻿{% extends "base.html" %}
+
+{% block title %}
+    Онлайн консультация | 
+{% endblock %}
+
+{% block topmenu %}
+    {% for page in top_pages %}
+        <a href="{{ page.get_absolute_url_ru }}">{{ page.title_ru }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block headerright %}
+    {% for page in side_pages %}
+        <a href="{{ page.get_absolute_url_ru }}">{{ page.title_ru }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    <p style="text-align: center">Наши специалисты обязательно ответят на все интересующие вас вопросы.</p>
+{% endblock %}
+
+{% block copyright %}
+    Все права защищены!
+{% endblock %}

@@ -1,0 +1,29 @@
+﻿{% extends "base_entries.html" %}
+
+{% block title %}
+    {{ year }} | 
+{% endblock %}
+
+{% block topmenu %}
+    {% for page in top_pages %}
+        <a href="{{ page.get_absolute_url_az }}">{{ page.title_az }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block headerright %}
+    {% for page in side_pages %}
+        <a href="{{ page.get_absolute_url_az }}">{{ page.title_az }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    <ul>
+    {% for month in date_list %}
+        <li><a href="/{{ lang_name }}/{{ month|date:"Y" }}/{{ month|date:"b" }}">{{ month|date:"F" }}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block copyright %}
+    Bütün hüquqlar qorunur!
+{% endblock %}

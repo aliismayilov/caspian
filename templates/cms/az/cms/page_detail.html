@@ -1,0 +1,26 @@
+﻿{% extends "base.html" %}
+
+{% block title_az %}
+    {{ page.title }} | 
+{% endblock %}
+
+{% block topmenu %}
+    {% for page in top_pages %}
+        <a href="{{ page.get_absolute_url_az }}">{{ page.title_az }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block headerright %}
+    {% for page in side_pages %}
+        <a href="{{ page.get_absolute_url_az }}">{{ page.title_az }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ page.title_az }}</h1>
+    {{ page.body_az|safe }}
+{% endblock %}
+
+{% block copyright %}
+    Bütün hüquqlar qorunur!
+{% endblock %}

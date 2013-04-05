@@ -1,0 +1,25 @@
+﻿{% extends "base_entries.html" %}
+
+{% block title %}{{ entry.title }} | {% endblock %}
+
+{% block topmenu %}
+    {% for page in top_pages %}
+        <a href="{{ page.get_absolute_url_en }}">{{ page.title_en }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block headerright %}
+    {% for page in side_pages %}
+        <a href="{{ page.get_absolute_url_en }}">{{ page.title_en }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ entry.title_en }}</h1>
+    <span>{{ entry.view_count }}</span>
+    <div>{{ entry.body_en|safe }}</div>
+{% endblock %}
+
+{% block copyright %}
+    All rights reserved!
+{% endblock %}

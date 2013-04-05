@@ -1,0 +1,43 @@
+﻿{% extends "base_categories.html" %}
+
+{% block title %}
+    {{ category.title }} | 
+{% endblock %}
+
+{% block topmenu %}
+    {% for page in top_pages %}
+        <a href="{{ page.get_absolute_url_ru }}">{{ page.title_ru }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block headerright %}
+    {% for page in side_pages %}
+        <a href="{{ page.get_absolute_url_ru }}">{{ page.title_ru }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    <h1>Результаты для {{ query }}</h1>
+    
+    {% if not search_categories and not search_entries and not search_pages %}
+        <p>Нет результатов.</p>
+    {% else %}
+        {% if search_entries %}
+            <h3>Новости</h3>
+            {% for entry in search_entries %}
+                <p><a href="{{ entry.get_absolute_url_ru }}">{{ entry.title_ru }}</a></p>
+            {% endfor %}
+        {% endif %}
+        
+        {% if search_pages %}
+            <h3>Страницы</h3>
+            {% for page in search_pages %}
+                <p><a href="{{ page.get_absolute_url_ru }}">{{ page.title_ru }}</a></p>
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block copyright %}
+    Все права защищены!
+{% endblock %}

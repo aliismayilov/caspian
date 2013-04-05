@@ -1,0 +1,25 @@
+﻿{% extends "base.html" %}
+
+{% block title %}
+    Onlayn məsləhət | 
+{% endblock %}
+
+{% block topmenu %}
+    {% for page in top_pages %}
+        <a href="{{ page.get_absolute_url_ru }}">{{ page.title_az }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block headerright %}
+    {% for page in side_pages %}
+        <a href="{{ page.get_absolute_url_ru }}">{{ page.title_az }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    <p style="text-align: center">Bizim mütəxəssislər sizi maraqlandıran sualları cavablandıracaqlar.</p>
+{% endblock %}
+
+{% block copyright %}
+    Bütün hüquqlar qorunur!
+{% endblock %}

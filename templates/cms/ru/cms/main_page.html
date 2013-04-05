@@ -1,0 +1,74 @@
+﻿{% extends "base.html" %}
+
+{% block topmenu %}
+    {% for page in top_pages %}
+        <a href="{{ page.get_absolute_url_ru }}">{{ page.title_ru }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block headerright %}
+    {% for page in side_pages %}
+        <a href="{{ page.get_absolute_url_ru }}">{{ page.title_ru }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block tagline %}
+    <p class="header-line1">Ваше будущее</p>
+    <p class="header-line2">в надежных руках</p>
+{% endblock %}
+
+{% block content %}
+    <div class="content-left">
+        <div class="content-left-pics">
+            <a href="/ru/uslugi.html" class="audit">АУДИТОРСКИЕ<br />УСЛУГИ</a>
+            <a href="/ru/uslugi.html" class="buxgal">БУХГАЛТЕРСКИЕ<br />УСЛУГИ</a>
+            <a href="/ru/uslugi.html" class="consulting">КОНСАЛТИНГОВЫЕ<br />УСЛУГИ</a>
+        </div>
+        <div class="content-left-news">
+            <h1 class="content-left-news-title">ЭКОНОМИЧЕСКИЕ НОВОСТИ</h1>
+            <ul>
+                {% for title, url in links %}
+                    <li><a href="{{ url }}">{{ title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="content-right">
+        <div class="content-right-news">
+            <h1>НОВОСТИ КОМПАНИИ</h1>
+            {% for entry in latest_entries %}
+                <a href="{{ entry.get_absolute_url_ru }}">
+                    <img src="{{ STATIC_URL }}img/arr.gif" alt="" />
+                    {{ entry.title_ru }}
+                </a>
+            {% endfor %}
+        </div>
+        <div class="content-right-vote">
+            <h1>Опрос</h1>
+            <h2>{{ poll.question_ru }}</h2>
+        {% if show_result %}
+            <ul>
+            {% for choice in poll.choice_set.all %}
+                <li>{{ choice.choice_ru }} - {{ choice.vote }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <form action="/{{ lang_name }}/poll/{{ poll.id }}/vote/" method="post">
+            {% csrf_token %}
+            {% for choice in poll.choice_set.all %}
+                <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+                <label for="choice{{ forloop.counter }}">{{ choice.choice_ru }}</label><br />
+            {% endfor %}
+                <div>
+                    <input type="submit" value="Голосовать" class="vote-button" />
+                    <input type="button" value="Результаты" class="vote-button" onclick="window.location.href='/{{ lang_name }}/?show_result=true'" />
+                </div>
+            </form>
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block copyright %}
+    Все права защищены!
+{% endblock %}
