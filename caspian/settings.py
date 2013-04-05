@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     'grappelli',
     'filebrowser',
     'django.contrib.admin',
+    'cms',
 )
 
 # A sample logging configuration. The only tangible logging
