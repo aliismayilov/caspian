@@ -5,7 +5,7 @@ from cms import views
 urlpatterns = patterns('',
     # homepage
     (r'^(?P<lang_name>\w{2,3})/$', views.main_page),
-    (r'^$', 'main_page'),
+    (r'^$', views.main_page),
     
     # search
     (r'^(?P<lang_name>\w{2,3})/search/', views.search),
