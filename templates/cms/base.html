@@ -16,12 +16,11 @@
                 {% endblock %}
             </div>
             <div class="top-lang">
-                {% load cms_extras %}
                 {% for language in languages %}
                     {% ifequal language.small_name lang_name %}
                         <span>[{{ language.small_name }}]</span>
                     {% else %}
-                        <a href="/{{ request.get_full_path|lang_url:language.small_name }}">[{{ language.small_name }}]</a>
+                        <a href="{{ language.get_absolute_url }}">[{{ language.small_name }}]</a>
                     {% endifequal %}
                 {% endfor %}
             </div>
