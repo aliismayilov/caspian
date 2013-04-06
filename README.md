@@ -1,4 +1,4 @@
-caspian
+website for Caspian Consulting
 =======
 
-caspian-consulting.com
+migration of old django 1.2 project to the new one, fix existing bugs.
