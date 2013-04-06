@@ -18,7 +18,7 @@ def main_page(request, lang_name=None):
     else:
         show_result = False
     
-    return render_to_response('%s/cms/main_page.html' % language.small_name, {
+    return render_to_response('cms/%s/cms/main_page.html' % language.small_name, {
             'links': get_latest_links(lang_name),
             'languages': Language.objects.all(),
             'lang_name': language.small_name,
@@ -38,7 +38,7 @@ def archive_year(request, lang_name, year):
     for i in range(1, 13):
         date_list.append(datetime.datetime.strptime(year + str(i), "%Y%m"))
     
-    return render_to_response('%s/cms/entry_archive_year.html' % language.small_name, {
+    return render_to_response('cms/%s/cms/entry_archive_year.html' % language.small_name, {
             'languages': Language.objects.all(),
             'lang_name': language.small_name,
             'top_pages': Page.objects.filter(type=Page.TOP),
@@ -77,7 +77,7 @@ def archive_month(request, lang_name, year, month):
     except (EmptyPage, InvalidPage):
         entries = paginator.page(paginator.num_pages)
     
-    return render_to_response('%s/cms/entry_archive_month.html' % language.small_name, {
+    return render_to_response('cms/%s/cms/entry_archive_month.html' % language.small_name, {
             'entries': entries,
             'languages': Language.objects.all(),
             'lang_name': language.small_name,
@@ -132,7 +132,7 @@ def entry_detail(request, lang_name, year, month, day, slug):
     entry.view_count += 1
     entry.save()
     
-    return render_to_response('%s/cms/entry_detail.html' % language.small_name, {
+    return render_to_response('cms/%s/cms/entry_detail.html' % language.small_name, {
             'entry': entry,
             'languages': Language.objects.all(),
             'lang_name': language.small_name,
@@ -146,7 +146,7 @@ def page_detail(request, lang_name, slug):
     language = get_object_or_404(Language, small_name=lang_name)
     page = get_object_or_404(Page, slug__iexact=slug)
     
-    return render_to_response('%s/cms/page_detail.html' % language.small_name, {
+    return render_to_response('cms/%s/cms/page_detail.html' % language.small_name, {
             'page': page,
             'languages': Language.objects.all(),
             'lang_name': language.small_name,
@@ -170,7 +170,7 @@ def search(request, lang_name):
             index__icontains=query
         )
         
-        return render_to_response('%s/cms/search.html' % language.small_name, {
+        return render_to_response('cms/%s/cms/search.html' % language.small_name, {
                 'query': query,
                 'languages': Language.objects.all(),
                 'lang_name': language.small_name,
@@ -222,7 +222,7 @@ def contact(request, lang_name):
     else:
         form = ContactForm()
     
-    return render_to_response('%s/cms/contact.html' % language.small_name, {
+    return render_to_response('cms/%s/cms/contact.html' % language.small_name, {
             'form': form,
             'languages': Language.objects.all(),
             'lang_name': language.small_name,
@@ -235,7 +235,7 @@ def contact(request, lang_name):
 def contact_thanks(request, lang_name):
     language = get_object_or_404(Language, small_name=lang_name)
     
-    return render_to_response('%s/cms/thanks.html' % language.small_name, {
+    return render_to_response('cms/%s/cms/thanks.html' % language.small_name, {
             'languages': Language.objects.all(),
             'lang_name': language.small_name,
             'top_pages': Page.objects.filter(type=Page.TOP),
